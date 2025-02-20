@@ -8,21 +8,21 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/login',
     },
     {
       path: '/login',
-      component: LoginView
+      component: LoginView,
     },
     {
       path: '/register',
-      component: RegisterView
+      component: RegisterView,
     },
     {
       path: '/books',
       component: BooksView,
-      meta: { requiresAuth: true }
-    }
+      meta: { requiresAuth: true },
+    },
   ],
 })
 
