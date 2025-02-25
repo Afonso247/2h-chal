@@ -11,7 +11,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div v-for="book in books" :key="book.id" class="border p-4 rounded shadow">
+      <div v-for="book in books" :key="book._id" class="border p-4 rounded shadow">
         <h3 class="text-xl font-semibold mb-2">{{ book.titulo }}</h3>
         <p><strong>Autor:</strong> {{ book.autor }}</p>
         <p><strong>Gêneros:</strong> {{ book.generos.join(', ') }}</p>
@@ -24,7 +24,7 @@
             Editar
           </button>
           <button
-            @click="deleteBook(book.id)"
+            @click="deleteBook(book._id)"
             class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
           >
             Excluir
@@ -121,7 +121,7 @@ export default {
   methods: {
     async fetchBooks() {
       try {
-        const response = await fetch('api/books', {
+        const response = await fetch('http://localhost:3000/api/books', {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
@@ -150,7 +150,7 @@ export default {
           generos: this.bookForm.generos.split(',').map((g) => g.trim()),
         }
 
-        const url = this.editingBook ? `api/books/${this.editingBook.id}` : 'api/books'
+        const url = this.editingBook ? `http://localhost:3000/api/books/${this.editingBook._id}` : 'http://localhost:3000/api/books'
 
         const method = this.editingBook ? 'PUT' : 'POST'
 
@@ -173,10 +173,10 @@ export default {
         console.error('Erro ao salvar livro:', error)
       }
     },
-    async deleteBook(id) {
+    async deleteBook(_id) {
       if (confirm('Tem certeza que deseja excluir este livro?')) {
         try {
-          const response = await fetch(`api/books/${id}`, {
+          const response = await fetch(`http://localhost:3000/api/books/${_id}`, {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`,

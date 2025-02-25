@@ -13,6 +13,8 @@
       <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
         Entrar
       </button>
+      <br>
+      <button type="button" @click="$router.push('/register')" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Registrar-se</button>
     </form>
   </div>
 </template>
@@ -30,7 +32,7 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        const response = await fetch('api/login', {
+        const response = await fetch('http://localhost:3000/api/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
