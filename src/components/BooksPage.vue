@@ -8,6 +8,12 @@
       >
         Adicionar Livro
       </button>
+      <button
+        @click="logout"
+        class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
+      >
+        Logout
+      </button>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -189,6 +195,10 @@ export default {
           console.error('Erro ao excluir livro:', error)
         }
       }
+    },
+    logout() {
+      localStorage.removeItem('token')
+      this.$router.push('/login')
     },
     resetForm() {
       this.bookForm = {
